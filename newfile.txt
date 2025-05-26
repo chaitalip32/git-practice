@@ -1,2 +1,231 @@
 Feature added
 Feature added add .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PRACTICAL 1: Basic Git Commands
+--------------------------------
+git --version
+
+# Configure Git
+git config --global user.name "usernewncrd"
+git config --global user.email "symca669@gmail.com"
+
+# Create folder and initialize
+mkdir git-demo
+cd git-demo
+git init
+
+# Create and track a file
+echo "Hello User" > file.txt
+git add file.txt
+git commit -m "Initial commit"
+
+# Check status and log
+git status
+git log
+
+
+PRACTICAL 2: Fork, Branch, Merge, Rebase on GitHub
+--------------------------------------------------
+# Clone forked repository
+git clone https://github.com/usernewncrd/git-practice.git
+cd git-practice
+
+# Create a branch
+git checkout -b feature
+
+# Make changes and commit
+echo "Feature added" >> newfile.txt
+git add .
+git commit -m "Added new feature"
+
+# Merge branch into main
+git checkout master
+git merge feature
+
+# Rebase feature branch
+git checkout feature
+git rebase master
+
+# Push to GitHub
+git push origin feature
+
+
+PRACTICAL 3: Git for Collaboration
+----------------------------------
+# Friend clones the repo
+git clone https://github.com/usernewncrd/git-practice.git
+cd team-repo
+git checkout -b bug-fix
+
+# Friend makes changes and pushes
+echo "Bug fixed" >> bug.txt
+git add .
+git commit -m "Fixed a bug"
+git push origin bug-fix
+
+# Create Pull Request (done via GitHub UI)
+
+
+PRACTICAL 4: Collaborating and Cloning using GitHub
+---------------------------------------------------
+# Clone public repo
+git clone https://github.com/usernewncrd/git-practice.git
+
+# Create branch
+git checkout -b update-readme
+
+# Edit and commit
+echo "Added a line" >> README.md
+git add README.md
+git commit -m "Updated README"
+
+# Push and open pull request
+git push origin update-readme
+
+
+PRACTICAL 5: Using GitLab Web IDE
+---------------------------------
+1. Sign up at https://gitlab.com
+2. Create a project and click on Web IDE
+3. Create index.html with:
+<html>
+<body>
+<h1>Hello from GitLab</h1>
+</body>
+</html>
+4. Commit and push changes
+
+
+PRACTICAL 6: GitLab Merge Requests
+----------------------------------
+1. Create a new branch in Web IDE
+2. Add/edit file and commit
+3. Select source and target branches
+4. Submit merge request and merge after review
+
+
+PRACTICAL 7: GitLab CI/CD Workflow
+----------------------------------
+Create .gitlab-ci.yml:
+stages:
+  - build
+  - test
+
+build-job:
+  stage: build
+  script:
+    - echo "Building..."
+
+test-job:
+  stage: test
+  script:
+    - echo "Testing..."
+
+# Commit and push, then view pipelines in GitLab
+
+
+PRACTICAL 8: Jenkins CI/CD Setup
+--------------------------------
+1. Install Jenkins: https://www.jenkins.io
+2. Run Jenkins: http://localhost:8080
+
+In Jenkins:
+- Create Freestyle Project: CI-Demo
+- Under Source Code Management → Git → Add repo URL
+- Under Build Steps → Execute shell:
+echo "Building Project..."
+echo "Run tests..."
+- Click "Build Now" and check Console Output
+
+
+PRACTICAL 9: Basic Docker Commands
+----------------------------------
+docker --version
+docker pull nginx
+docker images
+docker run -d -p 8080:80 --name mynginx nginx
+docker ps
+
+# Copy file to container
+docker cp index.html mynginx:/usr/share/nginx/html/
+
+# Copy from container to host
+docker cp mynginx:/usr/share/nginx/html/index.html .
+
+# Create Docker volume
+docker volume create mydata
+docker run -d -p 8081:80 --name nginx_vol -v mydata:/usr/share/nginx/html nginx
+
+docker volume ls
+docker rm -f mynginx
+docker rmi nginx
+
+
+PRACTICAL 10: Containerized Web App
+-----------------------------------
+# Create index.html and Dockerfile
+
+# Build and run Docker container
+docker build -t my-docker-webapp .
+docker run -d -p 8080:80 --name webapp-container my-docker-webapp
+docker ps
+docker stop webapp-container
+docker rm webapp-container
+docker rmi my-docker-webapp
+
+
+PRACTICAL 11: Ad-hoc Ansible Commands
+-------------------------------------
+# Ping remote host
+ansible local -i host.ini -m ping
+
+# Check uptime
+ansible local -i host.ini -a "uptime"
+
+# Install a package
+ansible local -i host.ini -m apt -a "name=nginx state=present update_cache=yes" --become
+
+# Start a service
+ansible local -i host.ini -m service -a "name=nginx state=started" --become
+
+
+PRACTICAL 12: Ansible Playbook
+------------------------------
+install_nginx.yml:
+---
+name: Install and start Nginx on web servers
+hosts: webservers
+become: true
+tasks:
+  - name: Install Nginx
+    apt:
+      name: nginx
+      state: present
+      update_cache: yes
+
+  - name: Start Nginx
+    service:
+      name: nginx
+      state: started
+      enabled: true
+
+# Run playbook
+ansible-playbook -i hosts.ini install_nginx.yml
